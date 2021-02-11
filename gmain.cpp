@@ -1,31 +1,44 @@
 #include"libOne.h"
 #include"package.h"
 void gmain() {
-#if 0
-    setNumFiles(5);
-    setFilename(0, "unko.png");
-    setFilename(1, "gorilla.png");
-    setFilename(2, "playerGu.png");
-    setFilename(3, "playerChoki.png");
-    setFilename(4, "playerPa.png");
-    createPackage("image.pak");
+
+#if 1
+    //createPackage("assets","package");
 #endif
     window(1920, 1080, full);
-    loadPackage("image.pak");
-    int unkoImg = loadImageFromPak("unko.png");
-    int gorillaImg = loadImageFromPak("gorilla.png");
-    int playerGuImg = loadImageFromPak("playerGu.png");
-    int playerChokiImg = loadImageFromPak("playerChoki.png");
-    int playerPaImg = loadImageFromPak("playerPa.png");
+    loadPackage("package");
+    int unkoImg = loadImage("assets\\unko.png");
+    int gorillaImg = loadImage("assets\\gorilla.png");
+    int playerGuImg = loadImage("assets\\Janken\\playerGu.png");
+    int playerChokiImg = loadImage("assets\\Janken\\playerChoki.png");
+    int playerPaImg = loadImage("assets\\Janken\\playerPa.png");
     deletePackage();
 
     rectMode(CENTER);
+    float gPx = width/2;
+    float gPy = 540;
+    float gRad = 0;
+    float gVx = 1;
+    float uPx = gPx;
+    float uPy = gPy+120;
+    float uVy = 10;
     while (notQuit) {
+        gPx = width/2+sin(gRad)*300;
+        gRad += 0.05;
+        uPy += uVy;
+        if (uPy > height + 50) {
+            uPx = gPx;
+            uPy = gPy + 120;
+        }
         clear(5);
-        image(unkoImg, width / 6, height / 2);
-        image(playerGuImg, width / 3, height / 4);
-        image(playerChokiImg, width / 3, height / 2);
-        image(playerPaImg, width / 3, height / 4*3);
-        image(gorillaImg, width / 4 * 3, height / 2);
+        fill(60, 120, 240);
+        rect(width / 2, height / 2, width, height);
+        fill(0,128, 0);
+        rect(width / 2, height / 2 + 200, width, height);
+        //image(playerGuImg, width / 3, height / 4);
+        //image(playerChokiImg, width / 3, height / 2);
+        //image(playerPaImg, width / 3, height / 4 * 3);
+        image(unkoImg, uPx, uPy);
+        image(gorillaImg, gPx, gPy);
     }
 }

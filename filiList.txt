@@ -1,0 +1,6 @@
+assets\gorilla.png  /gorilla.png
+assets\playerChoki.png  /playerChoki.png
+assets\playerGu.png  /playerGu.png
+assets\playerPa.png  /playerPa.png
+assets\unko.png  /unko.png
+5
