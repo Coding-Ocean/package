@@ -14,7 +14,7 @@ void loadImages(int* img, int num, const char* filename, int startIdx=0,const ch
 }
 void gmain() {
      
-#if 1
+#if 0
     createPackage("assets","package");
 #endif
     window(1920, 1080, full);
@@ -25,7 +25,8 @@ void gmain() {
     int img[numImages];
     loadImages(img, numImages, "assets\\a");
 
-    int unkoImg         = loadImage("assets\\unkoWhite.png");
+    int unkoWhiteImg = loadImage("assets\\unkoWhite.png");
+    int unkoImg         = loadImage("assets\\unko.png");
     int gorillaImg      = loadImage("assets\\gorilla.png");
     int playerGuImg     = loadImage("assets\\Janken\\playerGu.png");
     int playerChokiImg  = loadImage("assets\\Janken\\playerChoki.png");
@@ -71,8 +72,8 @@ void gmain() {
             if (++triggerCnt % interval == 0) {
                 for (int i = 0; i < numUnkos; i++) {
                     if (u[i].hp == 0) {
-                        u[i].px = mouseX;
-                        u[i].py = mouseY;
+                        u[i].px = width/2;
+                        u[i].py = height / 2;
                         u[i].deg = deg;
                         u[i].vx = sin(deg) * 5;
                         u[i].vy = -cos(deg) * 5;
@@ -96,26 +97,27 @@ void gmain() {
                 }
             }
         }
-        clear(100,100,100);
+        clear(0,0,0);
         //fill(0,128, 0);
         //rect(width / 2, height / 2 + 200, width, height);
         //image(playerGu.Img, width / 3, height / 4);
         //image(playerChokiImg, width / 3, height / 2);
         //image(playerPaImg, width / 3, height / 4 * 3);
         imageColor(143, 105, 68);
-        imageColor(255, 125, 240);
+        //imageColor(255, 125, 240);
         
         for (int i = 0; i < numUnkos; i++) {
             if (u[i].hp) {
-                image(unkoImg, u[i].px, u[i].py,u[i].deg);
+                image(unkoWhiteImg, u[i].px, u[i].py,u[i].deg);
             }
         }
-        imageColor(255);
 
+        imageColor(255);
         if (isPress(MOUSE_RBUTTON)) {
-            fill(143, 105, 68);
-            noStroke();
-            circle(mouseX, mouseY, 110);
+            image(unkoImg, width/2, height/2,0,2.2);
+            //fill(143, 105, 68);
+            //noStroke();
+            //circle(mouseX, mouseY, 110);
         }
         if (isTrigger(KEY_D)) {
             animCnt++;
@@ -140,6 +142,6 @@ void gmain() {
         }
         image(img[animIdx], px, py);
         textSize(300);
-        text(animIdx, width/2, 300);
+        text(animIdx, width/2+200, height/2);
     }
 }
